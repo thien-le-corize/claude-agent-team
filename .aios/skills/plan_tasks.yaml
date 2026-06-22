@@ -1,0 +1,54 @@
+name: plan_tasks
+description: Analyze requirements and produce a structured development plan.
+input:
+  - requirements
+output:
+  - task_list
+  - architecture_notes
+rules:
+  - produce_json_task_list
+  - every_task_needs_owner
+maxRetry: 2
+promptTemplate: >-
+  Analyze the user's request and produce:
+
+
+  1. A JSON task list in this exact format:
+
+  ```json filename="tasks.json"
+
+  {
+    "tasks": [
+      {
+        "id": "TASK-001",
+        "title": "Short task title",
+        "owner": "backend",
+        "input": {
+          "requirement": "Detailed requirement for this task"
+        },
+        "depends_on": []
+      }
+    ]
+  }
+
+  ```
+
+
+  2. Architecture notes in markdown:
+
+  ```markdown filename="architecture-notes.md"
+
+  ## Architecture Decision
+
+
+  - Tech stack choices
+
+  - Security considerations  
+
+  - API design decisions
+
+  ```
+
+
+  Keep tasks focused — one task per agent type. Owner must be one of: techlead,
+  backend, frontend, reviewer.

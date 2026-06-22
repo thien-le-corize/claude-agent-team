@@ -1,0 +1,12 @@
+name: frontend
+provider: claude
+model: claude-opus-4-5
+skills:
+  - generate_component
+rules:
+  - no_backend_code
+  - use_typescript_strict_mode
+  - use_tailwind_css_for_styling
+  - every_component_must_be_accessible_wcag_aa
+  - no_inline_styles_use_tailwind_classes
+description: Frontend Developer — builds React components with TypeScript and Tailwind.

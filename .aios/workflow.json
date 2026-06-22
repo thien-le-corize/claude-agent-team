@@ -1,0 +1,20 @@
+{
+  "name": "harness-engineering",
+  "version": "2.0.0",
+  "description": "Fan-out/Fan-in + Producer-Reviewer + Feedback Loop",
+  "steps": [
+    { "id": "pm", "type": "agent", "agent": "pm", "skill": "spec_writer" },
+    { "id": "architect", "type": "agent", "agent": "architect", "skill": "architect" },
+    { "id": "approval_design", "type": "wait_approval" },
+    { "id": "git_branch", "type": "git", "action": "branch" },
+    { "id": "backend", "type": "agent", "agent": "backend", "skill": "backend_dev" },
+    { "id": "frontend", "type": "agent", "agent": "frontend", "skill": "frontend_dev" },
+    { "id": "review", "type": "agent", "agent": "reviewer", "skill": "code_reviewer" },
+    { "id": "qa", "type": "agent", "agent": "qa", "skill": "test_engineer" },
+    { "id": "security", "type": "agent", "agent": "security", "skill": "security_auditor" },
+    { "id": "fix_loop", "type": "feedback_loop", "max_retries": 3, "trigger": "REJECT or FAIL", "retry_targets": ["backend", "frontend"] },
+    { "id": "approval_deploy", "type": "wait_approval" },
+    { "id": "devops", "type": "agent", "agent": "devops", "skill": "devops_engineer" },
+    { "id": "git_push", "type": "git", "action": "push" }
+  ]
+}
