@@ -1,0 +1,43 @@
+name: create_api
+description: >-
+  Create a complete REST API with OpenAPI 3.0 spec and TypeScript
+  implementation.
+input:
+  - requirement
+output:
+  - openapi_spec
+  - implementation
+rules:
+  - output_openapi_json_before_code
+  - every_endpoint_has_error_responses
+  - use_proper_http_status_codes
+  - validate_all_inputs
+validators:
+  - openapi
+  - has_code
+  - no_placeholder
+maxRetry: 3
+promptTemplate: |-
+  Implement the required API. You MUST produce exactly two outputs:
+
+  **Output 1 — OpenAPI 3.0 spec:**
+  ```json filename="openapi.json"
+  {
+    "openapi": "3.0.0",
+    "info": { "title": "...", "version": "1.0.0" },
+    "paths": { ... },
+    "components": { "schemas": { ... } }
+  }
+  ```
+
+  **Output 2 — TypeScript implementation:**
+  ```typescript filename="src/routes/[feature].ts"
+  import express from 'express'
+  // ... full implementation
+  ```
+
+  Rules:
+  - Every endpoint must have 200, 400, 401, 500 responses in the spec
+  - Use environment variables for secrets: process.env.JWT_SECRET
+  - Validate all request inputs before processing
+  - Include JSDoc comments on exported functions

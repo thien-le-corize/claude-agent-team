@@ -1,0 +1,30 @@
+name: write_tests
+description: Write comprehensive tests for an API or component.
+input:
+  - implementation
+  - openapi
+output:
+  - test_files
+rules:
+  - test_all_endpoints
+  - test_error_cases
+  - use_jest
+validators:
+  - has_code
+  - no_placeholder
+maxRetry: 2
+promptTemplate: |-
+  Write comprehensive tests for all code from previous steps.
+
+  ```typescript filename="src/__tests__/[feature].test.ts"
+  import request from 'supertest'
+  import app from '../app'
+
+  describe('[Feature] API', () => {
+    // Happy path tests
+    // Error case tests
+    // Edge case tests
+  })
+  ```
+
+  Cover: success cases, validation errors, auth errors, edge cases.

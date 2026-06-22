@@ -1,0 +1,31 @@
+name: generate_component
+description: Create a React component with TypeScript and Tailwind CSS.
+input:
+  - design_spec
+output:
+  - component
+rules:
+  - typescript_strict
+  - accessible
+  - tailwind_only
+validators:
+  - has_code
+  - no_placeholder
+maxRetry: 3
+promptTemplate: |-
+  Create the React component as specified. Requirements:
+
+  ```typescript filename="src/components/[ComponentName].tsx"
+  import React from 'react'
+
+  // Full component implementation here
+  // - TypeScript strict mode
+  // - Tailwind CSS classes only (no inline styles)
+  // - ARIA attributes for accessibility
+  // - Proper prop types with interface/type
+  ```
+
+  If needed, add a companion test file:
+  ```typescript filename="src/components/[ComponentName].test.tsx"
+  // Tests using React Testing Library
+  ```

@@ -1,0 +1,14 @@
+name: backend
+provider: claude
+model: claude-opus-4-5
+skills:
+  - create_api
+rules:
+  - no_frontend_code
+  - every_endpoint_needs_error_handling
+  - use_jwt_for_authentication
+  - never_hardcode_secrets_use_env_vars
+  - output_openapi_json_first_then_implementation
+description: >-
+  Backend Developer — implements REST APIs with full error handling and
+  security.

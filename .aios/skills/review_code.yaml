@@ -1,0 +1,40 @@
+name: review_code
+description: Review code for quality, security, and compliance with the OpenAPI spec.
+input:
+  - code
+  - openapi
+output:
+  - review_report
+rules:
+  - check_security
+  - check_error_handling
+  - verdict_required
+validators:
+  - review_pass
+maxRetry: 1
+promptTemplate: |-
+  Review all code from the previous steps. Produce a structured report:
+
+  ```markdown filename="review-report.md"
+  # Code Review Report
+
+  ## Summary
+  [1-2 sentence summary]
+
+  ## Checks
+
+  | Check | Status | Notes |
+  |-------|--------|-------|
+  | OpenAPI spec present | ✅/❌ | |
+  | All endpoints have error handling | ✅/❌ | |
+  | No hardcoded secrets | ✅/❌ | |
+  | Input validation | ✅/❌ | |
+  | SQL injection safe | ✅/❌ | |
+
+  ## Issues Found
+  [List critical issues, or "None found"]
+
+  ## Verdict
+  **PASS ✅** / **FAIL ❌**
+  Reason: [explain verdict]
+  ```

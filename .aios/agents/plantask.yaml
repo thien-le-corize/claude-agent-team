@@ -1,0 +1,12 @@
+name: plantask
+provider: claude
+model: claude-opus-4-5
+skills:
+  - plan_tasks
+rules:
+  - define_all_tasks_before_implementation
+  - every_task_must_have_id_owner_and_input
+  - output_task_list_as_json_with_tasks_array
+description: >-
+  Planner Agent — analyzes TechLead specifications to plan specific development
+  tasks.
